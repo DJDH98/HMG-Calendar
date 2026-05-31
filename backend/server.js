@@ -20,7 +20,10 @@ const PUBLIC_DIR = process.env.PUBLIC_DIR || path.join(__dirname, "public");
 
 const app = express();
 
-app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: false
+}));
 app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(morgan("combined"));

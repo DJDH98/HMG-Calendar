@@ -11,7 +11,7 @@ RUN addgroup -S hmg && adduser -S hmg -G hmg
 COPY --from=deps /app/backend/node_modules ./backend/node_modules
 COPY backend/package*.json ./backend/
 COPY backend/server.js ./backend/
-COPY frontend/index.html frontend/style.css frontend/script.js ./backend/public/
+COPY frontend/ ./backend/public/
 USER hmg
 EXPOSE 3000
 WORKDIR /app/backend
