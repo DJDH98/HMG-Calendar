@@ -45,6 +45,19 @@ function appendDateRange(url, start, end) {
   }
 }
 
+function appendCalendarIncludes(url, serviceName) {
+  if (serviceName === "sonarr") {
+    url.searchParams.set("includeSeries", "true");
+    url.searchParams.set("includeEpisodeFile", "true");
+    url.searchParams.set("includeEpisodeImages", "true");
+  }
+
+  if (serviceName === "radarr") {
+    url.searchParams.set("includeMovie", "true");
+    url.searchParams.set("includeMovieFile", "true");
+  }
+}
+
 async function fetchCalendar(serviceName, baseUrl, apiKey, start, end) {
   if (!apiKey) {
     return {
@@ -60,6 +73,7 @@ async function fetchCalendar(serviceName, baseUrl, apiKey, start, end) {
   const url = new URL(`${normalizeBaseUrl(baseUrl)}/api/v3/calendar`);
 
   appendDateRange(url, start, end);
+  appendCalendarIncludes(url, serviceName);
 
   try {
     const response = await fetch(url, {
@@ -195,7 +209,8 @@ function mapSonarrEvent(item) {
   const episodeCode = Number.isInteger(season) && Number.isInteger(episode)
     ? `S${String(season).padStart(2, "0")}E${String(episode).padStart(2, "0")}`
     : null;
-  const title = [series.title || "Untitled Series", episodeCode, episodeTitle].filter(Boolean).join(" - ");
+  const seriesTitle = series.title || item?.seriesTitle || item?.showTitle || "Unknown Series";
+  const title = [seriesTitle, episodeCode, episodeTitle].filter(Boolean).join(" - ");
   const downloaded = hasFile(item, "sonarr");
 
   return {
