@@ -1,8 +1,9 @@
 services:
-  hmg-calendar-backend:
+  hmg-calendar:
     build:
-      context: ./backend
-    container_name: hmg-calendar-backend
+      context: .
+    image: ghcr.io/djdh98/hmg-calendar:latest
+    container_name: hmg-calendar
     restart: unless-stopped
     environment:
       RADARR_URL: ${RADARR_URL:-http://radarr:7878}
@@ -12,18 +13,6 @@ services:
       PORT: 3000
     expose:
       - "3000"
-    networks:
-      - ibrapproxy
-
-  hmg-calendar-frontend:
-    build:
-      context: ./frontend
-    container_name: hmg-calendar-frontend
-    restart: unless-stopped
-    depends_on:
-      - hmg-calendar-backend
-    expose:
-      - "80"
     networks:
       - ibrapproxy
 

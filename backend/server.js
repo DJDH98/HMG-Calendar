@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 dotenv.config();
 
@@ -12,6 +14,9 @@ const SONARR_URL = process.env.SONARR_URL || "http://sonarr:8989";
 const RADARR_API_KEY = process.env.RADARR_API_KEY || "";
 const SONARR_API_KEY = process.env.SONARR_API_KEY || "";
 const REQUEST_TIMEOUT_MS = Number(process.env.REQUEST_TIMEOUT_MS || 12000);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const PUBLIC_DIR = process.env.PUBLIC_DIR || path.join(__dirname, "public");
 
 const app = express();
 
@@ -19,6 +24,10 @@ app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(morgan("combined"));
+app.use(express.static(PUBLIC_DIR, {
+  extensions: ["html"],
+  maxAge: process.env.NODE_ENV === "production" ? "1h" : 0
+}));
 
 function normalizeBaseUrl(url) {
   return String(url || "").replace(/\/+$/, "");
@@ -275,6 +284,15 @@ app.get("/api/poster", async (req, res) => {
     console.error(error);
     res.status(502).json({ error: "Unable to load poster" });
   }
+});
+
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api/")) {
+    next();
+    return;
+  }
+
+  res.sendFile(path.join(PUBLIC_DIR, "index.html"));
 });
 
 app.use((_req, res) => {
