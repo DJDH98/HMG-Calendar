@@ -2,7 +2,7 @@ services:
   hmg-calendar:
     build:
       context: .
-    image: ghcr.io/djdh98/hmg-calendar:latest
+    image: ghcr.io/djdh98/hmg-calendar-unraid:latest
     container_name: hmg-calendar
     restart: unless-stopped
     environment:

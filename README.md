@@ -64,14 +64,14 @@ SONARR_URL=http://172.18.0.12:8989
 Use this image in the Unraid Docker form:
 
 ```text
-ghcr.io/djdh98/hmg-calendar:latest
+ghcr.io/djdh98/hmg-calendar-unraid:latest
 ```
 
 Suggested template values:
 
 ```text
 Name: HMG Calendar
-Repository: ghcr.io/djdh98/hmg-calendar:latest
+Repository: ghcr.io/djdh98/hmg-calendar-unraid:latest
 Network Type: Custom: ibrapproxy
 Console shell command: Shell
 Privileged: Off

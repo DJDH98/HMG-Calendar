@@ -11,7 +11,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/djdh98/hmg-calendar
+  IMAGE_NAME: ghcr.io/djdh98/hmg-calendar-unraid
 
 jobs:
   publish:
