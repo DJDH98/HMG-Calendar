@@ -108,6 +108,23 @@ PORT=3000
 
 The API key fields are marked as masked in the Unraid template.
 
+### Docker Hub Publishing
+
+The GitHub Actions workflow can also publish this image to Docker Hub as:
+
+```text
+djdh98/hmg-calendar:latest
+```
+
+To enable Docker Hub publishing, add these repository secrets in GitHub:
+
+```text
+DOCKERHUB_USERNAME
+DOCKERHUB_TOKEN
+```
+
+Use a Docker Hub access token for `DOCKERHUB_TOKEN`, not your account password. After adding both secrets, rerun the `Publish Container` workflow from the GitHub Actions tab.
+
 Add this port mapping if Unraid asks for one:
 
 ```text
