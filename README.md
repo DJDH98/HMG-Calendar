@@ -83,14 +83,14 @@ Then go to Docker > Add Container and select `HMG-Calendar` from the template dr
 If you are manually filling the Docker form, use this image:
 
 ```text
-ghcr.io/djdh98/hmg-calendar-unraid:latest
+djdh98/hmg-calendar:latest
 ```
 
 Suggested template values:
 
 ```text
 Name: HMG Calendar
-Repository: ghcr.io/djdh98/hmg-calendar-unraid:latest
+Repository: djdh98/hmg-calendar:latest
 Network Type: Custom: ibrapproxy
 Console shell command: Shell
 Privileged: Off
@@ -124,6 +124,12 @@ DOCKERHUB_TOKEN
 ```
 
 Use a Docker Hub access token for `DOCKERHUB_TOKEN`, not your account password. After adding both secrets, rerun the `Publish Container` workflow from the GitHub Actions tab.
+
+The current Docker Hub image is:
+
+```text
+djdh98/hmg-calendar:latest
+```
 
 Add this port mapping if Unraid asks for one:
 

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>HMG-Calendar</Name>
-  <Repository>ghcr.io/djdh98/hmg-calendar-unraid:latest</Repository>
-  <Registry>https://github.com/DJDH98/HMG-Calendar/pkgs/container/hmg-calendar-unraid</Registry>
+  <Repository>djdh98/hmg-calendar:latest</Repository>
+  <Registry>https://hub.docker.com/r/djdh98/hmg-calendar</Registry>
   <Network>ibrapproxy</Network>
   <MyIP/>
   <Shell>sh</Shell>
