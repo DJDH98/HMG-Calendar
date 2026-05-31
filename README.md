@@ -80,6 +80,18 @@ wget -O /boot/config/plugins/dockerMan/templates-user/my-HMG-Calendar.xml https:
 
 Then go to Docker > Add Container and select `HMG-Calendar` from the template dropdown.
 
+You can also add this GitHub repository as a Docker template repository in Unraid:
+
+```text
+https://github.com/DJDH98/HMG-Calendar
+```
+
+Depending on your Unraid version, this is either available in the Docker template repositories field or by adding the URL to:
+
+```text
+/boot/config/plugins/dockerMan/template-repos
+```
+
 If you are manually filling the Docker form, use this image:
 
 ```text
