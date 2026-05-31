@@ -1,0 +1,32 @@
+services:
+  hmg-calendar-backend:
+    build:
+      context: ./backend
+    container_name: hmg-calendar-backend
+    restart: unless-stopped
+    environment:
+      RADARR_URL: ${RADARR_URL:-http://radarr:7878}
+      RADARR_API_KEY: ${RADARR_API_KEY}
+      SONARR_URL: ${SONARR_URL:-http://sonarr:8989}
+      SONARR_API_KEY: ${SONARR_API_KEY}
+      PORT: 3000
+    expose:
+      - "3000"
+    networks:
+      - ibrapproxy
+
+  hmg-calendar-frontend:
+    build:
+      context: ./frontend
+    container_name: hmg-calendar-frontend
+    restart: unless-stopped
+    depends_on:
+      - hmg-calendar-backend
+    expose:
+      - "80"
+    networks:
+      - ibrapproxy
+
+networks:
+  ibrapproxy:
+    external: true

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>HMG Calendar</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Unified Media Schedule</p>
+          <h1>HMG Calendar</h1>
+        </div>
+        <div class="legend" aria-label="Calendar legend">
+          <span><i class="movie-dot"></i>Movies</span>
+          <span><i class="tv-dot"></i>TV</span>
+        </div>
+      </header>
+
+      <section class="status-panel" id="statusPanel" aria-live="polite">
+        <span class="status-pill loading">Syncing calendar data</span>
+      </section>
+
+      <section class="calendar-panel">
+        <div id="calendar"></div>
+      </section>
+    </main>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="modalClose" type="button" aria-label="Close details">&times;</button>
+        <div class="poster-frame">
+          <canvas id="posterCanvas" width="320" height="480" aria-label="Poster artwork"></canvas>
+        </div>
+        <div class="modal-content">
+          <p class="media-type" id="modalType"></p>
+          <h2 id="modalTitle"></h2>
+          <p class="modal-date" id="modalDate"></p>
+          <div class="metadata-grid">
+            <div>
+              <span>Status</span>
+              <strong id="modalStatus"></strong>
+            </div>
+            <div>
+              <span>Quality</span>
+              <strong id="modalQuality"></strong>
+            </div>
+            <div>
+              <span>Source</span>
+              <strong id="modalSource"></strong>
+            </div>
+          </div>
+          <p class="overview" id="modalOverview"></p>
+        </div>
+      </article>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="/script.js"></script>
+  </body>
+</html>
