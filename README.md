@@ -29,6 +29,8 @@ frontend/
   nginx.conf
 .github/workflows/
   publish-container.yml
+unraid/
+  HMG-Calendar.xml
 Dockerfile
 docker-compose.yml
 README.md
@@ -61,7 +63,24 @@ SONARR_URL=http://172.18.0.12:8989
 
 ### Unraid Docker Template
 
-Use this image in the Unraid Docker form:
+This repository includes an Unraid template at:
+
+```text
+unraid/HMG-Calendar.xml
+```
+
+The template adds installer fields for the Radarr and Sonarr API keys, so Unraid will ask for them before creating the container.
+
+To add the template to Unraid, run this on the Unraid terminal:
+
+```bash
+mkdir -p /boot/config/plugins/dockerMan/templates-user
+wget -O /boot/config/plugins/dockerMan/templates-user/my-HMG-Calendar.xml https://raw.githubusercontent.com/DJDH98/HMG-Calendar/master/unraid/HMG-Calendar.xml
+```
+
+Then go to Docker > Add Container and select `HMG-Calendar` from the template dropdown.
+
+If you are manually filling the Docker form, use this image:
 
 ```text
 ghcr.io/djdh98/hmg-calendar-unraid:latest
@@ -86,6 +105,8 @@ SONARR_URL=http://sonarr:8989
 SONARR_API_KEY=your_sonarr_api_key_here
 PORT=3000
 ```
+
+The API key fields are marked as masked in the Unraid template.
 
 Add this port mapping if Unraid asks for one:
 

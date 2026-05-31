@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>HMG-Calendar</Name>
+  <Repository>ghcr.io/djdh98/hmg-calendar-unraid:latest</Repository>
+  <Registry>https://github.com/DJDH98/HMG-Calendar/pkgs/container/hmg-calendar-unraid</Registry>
+  <Network>ibrapproxy</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/DJDH98/HMG-Calendar/issues</Support>
+  <Project>https://github.com/DJDH98/HMG-Calendar</Project>
+  <Overview>Unified media calendar dashboard for Radarr and Sonarr. HMG Calendar pulls upcoming movie release dates and TV air dates over your internal Docker network and displays them in a dark FullCalendar interface.</Overview>
+  <Category>MediaApp:Video Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:3000]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/DJDH98/HMG-Calendar/master/unraid/HMG-Calendar.xml</TemplateURL>
+  <Icon/>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Web UI Port" Target="3000" Default="3000" Mode="tcp" Description="Container web port for HMG Calendar. Point Nginx Proxy Manager to this port." Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Radarr URL" Target="RADARR_URL" Default="http://radarr:7878" Mode="" Description="Internal Docker URL for Radarr. Use http://172.18.0.10:7878 if container DNS does not resolve." Type="Variable" Display="always" Required="true" Mask="false">http://radarr:7878</Config>
+  <Config Name="Radarr API Key" Target="RADARR_API_KEY" Default="" Mode="" Description="Radarr API key from Settings &gt; General &gt; Security." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Sonarr URL" Target="SONARR_URL" Default="http://sonarr:8989" Mode="" Description="Internal Docker URL for Sonarr. Use http://172.18.0.12:8989 if container DNS does not resolve." Type="Variable" Display="always" Required="true" Mask="false">http://sonarr:8989</Config>
+  <Config Name="Sonarr API Key" Target="SONARR_API_KEY" Default="" Mode="" Description="Sonarr API key from Settings &gt; General &gt; Security." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Application Port" Target="PORT" Default="3000" Mode="" Description="Internal application port. Leave this at 3000 unless you also change the port mapping." Type="Variable" Display="advanced" Required="true" Mask="false">3000</Config>
+</Container>
