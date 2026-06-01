@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
     <title>HMG Calendar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
@@ -14,15 +17,14 @@
           <p class="eyebrow">Unified Media Schedule</p>
           <h1>HMG Calendar</h1>
         </div>
+        <section class="status-panel" id="statusPanel" aria-live="polite">
+          <span class="status-pill loading">Syncing calendar data</span>
+        </section>
         <div class="legend" aria-label="Calendar legend">
           <span><i class="movie-dot"></i>Movies</span>
           <span><i class="tv-dot"></i>TV</span>
         </div>
       </header>
-
-      <section class="status-panel" id="statusPanel" aria-live="polite">
-        <span class="status-pill loading">Syncing calendar data</span>
-      </section>
 
       <section class="calendar-panel">
         <div id="calendar"></div>
@@ -43,10 +45,6 @@
             <div>
               <span>Status</span>
               <strong id="modalStatus"></strong>
-            </div>
-            <div>
-              <span>Quality</span>
-              <strong id="modalQuality"></strong>
             </div>
             <div>
               <span>Source</span>

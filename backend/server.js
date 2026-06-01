@@ -170,35 +170,77 @@ function hasFile(item, source) {
   return Boolean(item?.episodeFile || item?.hasFile);
 }
 
-function getRadarrDate(item) {
-  return item?.inCinemas || item?.physicalRelease || item?.digitalRelease || item?.releaseDate || item?.airDateUtc;
+function parseDate(value) {
+  const date = value ? new Date(value) : null;
+
+  return date && !Number.isNaN(date.valueOf()) ? date : null;
 }
 
-function mapRadarrEvent(item) {
-  const movie = item?.movie || item;
-  const start = getRadarrDate(item);
-  const downloaded = hasFile(item, "radarr");
+function isInRange(dateValue, start, end) {
+  const date = parseDate(dateValue);
+  const startDate = parseDate(start);
+  const endDate = parseDate(end);
 
-  return {
-    id: `radarr-${movie?.id || item?.id || start}`,
+  if (!date) {
+    return false;
+  }
+
+  if (startDate && date < startDate) {
+    return false;
+  }
+
+  if (endDate && date >= endDate) {
+    return false;
+  }
+
+  return true;
+}
+
+function getRadarrReleaseEvents(item) {
+  const movie = item?.movie || item;
+
+  return [
+    {
+      key: "digital",
+      label: "Streaming Release",
+      date: item?.digitalRelease || movie?.digitalRelease
+    },
+    {
+      key: "physical",
+      label: "Physical Release",
+      date: item?.physicalRelease || movie?.physicalRelease
+    }
+  ].filter((release) => release.date);
+}
+
+function mapRadarrEvents(item, start, end) {
+  const movie = item?.movie || item;
+  const downloaded = hasFile(item, "radarr");
+  const releases = getRadarrReleaseEvents(item)
+    .filter((release) => isInRange(release.date, start, end));
+
+  return releases.map((release) => ({
+    id: `radarr-${movie?.id || item?.id || release.date}-${release.key}`,
     title: movie?.title || item?.title || "Untitled Movie",
-    start,
+    start: release.date,
     allDay: true,
     color: "#f5a623",
     textColor: "#111111",
+    classNames: ["media-event", "movie-event", `${release.key}-release-event`],
     extendedProps: {
       source: "radarr",
       type: "Movie",
+      releaseType: release.label,
       overview: movie?.overview || item?.overview || "",
       poster: posterProxyPath("radarr", pickImagePath(movie?.images || item?.images)),
-      status: downloaded ? "Downloaded" : "In Cinematic Release",
+      status: downloaded ? `Downloaded - ${release.label}` : release.label,
       qualityProfile: movie?.qualityProfile?.name || formatQuality(item),
       year: movie?.year || null,
       runtime: movie?.runtime || null,
       monitored: movie?.monitored ?? null,
       rawStatus: movie?.status || item?.status || null
     }
-  };
+  }));
 }
 
 function mapSonarrEvent(item) {
@@ -217,9 +259,10 @@ function mapSonarrEvent(item) {
     id: `sonarr-${item?.id || item?.episodeId || item?.airDateUtc}`,
     title,
     start: item?.airDateUtc || item?.airDate,
-    allDay: !item?.airDateUtc,
+    allDay: true,
     color: "#2f80ed",
     textColor: "#ffffff",
+    classNames: ["media-event", "tv-event"],
     extendedProps: {
       source: "sonarr",
       type: "TV Episode",
@@ -256,7 +299,7 @@ app.get("/api/calendar", async (req, res) => {
   ]);
 
   const events = [
-    ...radarr.data.map(mapRadarrEvent),
+    ...radarr.data.flatMap((item) => mapRadarrEvents(item, start, end)),
     ...sonarr.data.map(mapSonarrEvent)
   ].filter(isValidEvent);
 

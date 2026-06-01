@@ -9,7 +9,6 @@ const modalFields = {
   title: document.getElementById("modalTitle"),
   date: document.getElementById("modalDate"),
   status: document.getElementById("modalStatus"),
-  quality: document.getElementById("modalQuality"),
   source: document.getElementById("modalSource"),
   overview: document.getElementById("modalOverview")
 };
@@ -140,7 +139,6 @@ function openModal(eventInfo) {
   modalFields.title.textContent = event.title;
   modalFields.date.textContent = formatDate(event.start);
   modalFields.status.textContent = props.status || "Unknown";
-  modalFields.quality.textContent = props.qualityProfile || "Unknown";
   modalFields.source.textContent = props.source === "radarr" ? "Radarr" : "Sonarr";
   modalFields.overview.textContent = props.overview || "No summary is available for this item.";
 
@@ -189,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
       list: "Agenda"
     },
     nowIndicator: true,
+    displayEventTime: false,
     eventSources: [{ events: fetchEvents }],
     eventClick: openModal,
     loading(isLoading) {
