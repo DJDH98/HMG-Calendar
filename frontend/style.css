@@ -103,13 +103,13 @@ h1 {
 .status-panel {
   display: flex;
   justify-content: center;
-  min-height: 34px;
-  flex: 1 1 240px;
+  flex: 0 1 auto;
   min-width: 0;
 }
 
 .status-pill {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   min-height: 34px;
@@ -463,9 +463,8 @@ h1 {
   }
 
   .status-panel {
-    flex: 0 0 auto;
     justify-content: flex-start;
-    width: 100%;
+    width: auto;
     min-height: 0;
   }
 
