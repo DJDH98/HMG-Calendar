@@ -171,10 +171,16 @@ async function fetchEvents(info, successCallback, failureCallback) {
   }
 }
 
+function getPreferredView() {
+  return window.matchMedia("(max-width: 760px) and (orientation: portrait)").matches
+    ? "listMonth"
+    : "dayGridMonth";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const calendarElement = document.getElementById("calendar");
   const calendar = new FullCalendar.Calendar(calendarElement, {
-    initialView: "dayGridMonth",
+    initialView: getPreferredView(),
     height: "auto",
     headerToolbar: {
       left: "prev,next today",
@@ -198,6 +204,17 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   calendar.render();
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const preferredView = getPreferredView();
+      if (calendar.view.type !== preferredView) {
+        calendar.changeView(preferredView, calendar.getDate());
+      }
+    }, 180);
+  });
 });
 
 modalClose.addEventListener("click", closeModal);

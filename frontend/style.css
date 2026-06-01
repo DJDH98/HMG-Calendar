@@ -482,6 +482,24 @@ h1 {
     justify-content: center;
   }
 
+  .fc .fc-list-day-cushion,
+  .fc .fc-list-table td {
+    padding: 10px 12px;
+  }
+
+  .fc .fc-list-event-title {
+    line-height: 1.35;
+  }
+
+  .fc .fc-list-event-title a {
+    white-space: normal;
+  }
+
+  .fc .fc-list-event-graphic {
+    padding-left: 10px;
+    width: 24px;
+  }
+
   .modal {
     grid-template-columns: 1fr;
     padding: 18px;
