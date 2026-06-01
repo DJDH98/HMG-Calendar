@@ -48,6 +48,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  flex-wrap: wrap;
   margin-bottom: 18px;
 }
 
@@ -104,6 +105,7 @@ h1 {
   justify-content: center;
   min-height: 34px;
   flex: 1 1 240px;
+  min-width: 0;
 }
 
 .status-pill {
@@ -457,11 +459,14 @@ h1 {
   .topbar {
     align-items: start;
     flex-direction: column;
+    gap: 14px;
   }
 
   .status-panel {
+    flex: 0 0 auto;
     justify-content: flex-start;
     width: 100%;
+    min-height: 0;
   }
 
   .calendar-panel {
