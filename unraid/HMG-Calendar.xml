@@ -13,7 +13,7 @@
   <Category>MediaApp:Video Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:3000]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/DJDH98/HMG-Calendar/master/unraid/HMG-Calendar.xml</TemplateURL>
-  <Icon/>
+  <Icon>https://raw.githubusercontent.com/DJDH98/HMG-Calendar/master/frontend/icon-512.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>

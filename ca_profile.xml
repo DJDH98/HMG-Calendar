@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Maintainer>
-  <Icon/>
+  <Icon>https://raw.githubusercontent.com/DJDH98/HMG-Calendar/master/frontend/icon-512.png</Icon>
   <Profile>
     HMG Calendar is a self-hosted media calendar dashboard for Radarr and Sonarr on Unraid.
   </Profile>
